@@ -1,0 +1,4 @@
+username = "JohnDoe"
+password = "topsecretsuperpassword"
+server = "https://companyname.rocket.chat"
+page_size = 100
