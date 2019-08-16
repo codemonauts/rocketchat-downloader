@@ -73,7 +73,7 @@ def identify_room(auth, room_name):
             print("Identified {} as a group".format(room_name))
             return "group"
 
-    print("Either {} is a channel and doesn't exists, or it's a group and you are not a member".format(room_name))
+    print("Either {} doesn't exists, or it's a private group and you are not a member".format(room_name))
     sys.exit()
 
 
