@@ -7,14 +7,6 @@ import sys
 import config
 
 
-def login():
-    endpoint = "{}/api/v1/login".format(config.server)
-    payload = {"user": config.username, "password": config.password}
-    r = requests.post(endpoint, json=payload)
-    data = r.json()["data"]
-    return {"X-User-Id": data["userId"], "X-Auth-Token": data["authToken"]}
-
-
 def download_attachments(room_name, auth, page):
     for message in page:
         if message.get("attachments"):
@@ -83,7 +75,7 @@ if __name__ == "__main__":
         print("Please provice a room name with './download.py <room name>'")
         sys.exit()
 
-    auth = login()
+    auth = {"X-Auth-Token": config.token, "X-User-Id": config.user_id}
     room_type = identify_room(auth, room_name)
 
     try:
