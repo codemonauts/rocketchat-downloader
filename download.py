@@ -12,8 +12,7 @@ def download_attachments(room_name, auth, page):
         if message.get("attachments"):
             for att in message["attachments"]:
                 if att.get("type") == "file":
-                    file_name = "output/{}/files/{}".format(
-                        room_name, att["title"])
+                    file_name = "output/{}/files/{}".format(room_name, att["title"])
                     print("Downlaoding {}".format(file_name))
                     url = "{}{}".format(config.server, att["title_link"])
                     r = requests.get(url, headers=auth)
@@ -27,9 +26,11 @@ def get_history(auth, room_name, room_type):
 
     print("Starting dowload")
     history = []
-    params = {"roomName": room_name,
-              "count": config.page_size,
-              "offset": 0}
+    params = {
+        "roomName": room_name,
+        "count": config.page_size,
+        "offset": 0,
+    }
 
     while True:
         print("Getting {} messages".format(config.page_size))
@@ -46,8 +47,7 @@ def get_history(auth, room_name, room_type):
 
 def identify_room(auth, room_name):
     # Get list of all visible channels
-    r = requests.get(
-        "{}/api/v1/channels.list".format(config.server), headers=auth)
+    r = requests.get("{}/api/v1/channels.list".format(config.server), headers=auth)
     data = r.json()
     if data["success"]:
         channel_names = [x["name"] for x in data["channels"]]
@@ -56,8 +56,7 @@ def identify_room(auth, room_name):
             return "channel"
 
     # Get list of all visible channels
-    r = requests.get(
-        "{}/api/v1/groups.list".format(config.server), headers=auth)
+    r = requests.get("{}/api/v1/groups.list".format(config.server), headers=auth)
     data = r.json()
     if data["success"]:
         group_names = [x["name"] for x in data["groups"]]
